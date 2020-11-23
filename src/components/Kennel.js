@@ -37,11 +37,11 @@ export const Kennel = () => (
         <article className="locations">
             <Location />
             <Location />
-            <Location />
         </article>
 
         <h2>Customers</h2>
         <article className="customers">
+            <Customer />
             <Customer />
             <Customer />
             <Customer />
