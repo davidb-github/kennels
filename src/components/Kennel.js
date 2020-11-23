@@ -1,7 +1,11 @@
 import React from "react"
-import { Animal } from './animal/Animal'
+// modules
+import { Animal   } from './animal/Animal'
 import { Location } from './location/Location'
+import { Customer } from "./customer/Customer"
+// styles
 import "./Kennel.css"
+
 
 
 export const Kennel = () => (
@@ -12,7 +16,7 @@ export const Kennel = () => (
             <div>Visit Us at the Nashville North Location</div>
             <div>500 Puppy Way</div>
         </address>
-
+        
         <h2>Animals</h2>
         <article className="animals">
             <Animal />
@@ -25,6 +29,13 @@ export const Kennel = () => (
             <Location />
             <Location />
             <Location />
+        </article>
+
+        <h2>Customers</h2>
+        <article className="customers">
+            <Customer />
+            <Customer />
+            <Customer />
         </article>
     </>
 )
