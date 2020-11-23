@@ -3,8 +3,10 @@ import React from "react"
 import { Animal   } from './animal/Animal'
 import { Location } from './location/Location'
 import { Customer } from "./customer/Customer"
+import { Employee } from "./employee/Employee"
 // styles
 import "./Kennel.css"
+
 
 
 
@@ -22,6 +24,13 @@ export const Kennel = () => (
             <Animal />
             <Animal />
             <Animal />
+        </article>
+
+        <h2>Employees</h2>
+        <article className="employees">
+            <Employee />
+            <Employee />
+            <Employee />
         </article>
 
         <h2>Locations</h2>
