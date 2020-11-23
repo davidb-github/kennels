@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react"
-import { LocationContext } from "./LocationProvider"
-import { Location } from "./Location"
-import "./Locations.css"
+import        { LocationContext }       from "./LocationProvider"
+import        { Location }              from './Location'
+import                                       "./Location.css"
+
 
 export const LocationList = () => {
     // This state changes when `getLocations()` is invoked below
@@ -12,6 +13,7 @@ export const LocationList = () => {
         "mounted" to the DOM. React renders blank HTML first,
         then gets the data, then re-renders.
     */
+//    will run only once because 2nd arg is a blank array/
     useEffect(() => {
         console.log("LocationList: Initial render before data")
         getLocations()
@@ -21,11 +23,13 @@ export const LocationList = () => {
         This effect is solely for learning purposes. The effect
         it is responding to is that the location state changed.
     */
-    useEffect(() => {
+//    This will run each time locations state changes.
+    useEffect( () => {
         console.log("LocationList: Location state changed")
         console.log(locations)
     }, [locations])
 
+    // use {} anytime javascript is needed inside JSX
     return (
         <div className="locations">
         {

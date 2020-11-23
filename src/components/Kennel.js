@@ -1,9 +1,10 @@
 import React from "react"
 // modules
 import { Animal   } from './animal/Animal'
-import { Location } from './location/Location'
+import { LocationList } from './location/LocationList'
 import { Customer } from "./customer/Customer"
 import { Employee } from "./employee/Employee"
+import { LocationProvider } from './location/LocationProvider'
 // styles
 import "./Kennel.css"
 
@@ -35,8 +36,11 @@ export const Kennel = () => (
 
         <h2>Locations</h2>
         <article className="locations">
-            <Location />
-            <Location />
+            {/* delete Location x 2 and then add <LocationList /> */}
+            {/* anytime we want provider supplied data, we need to wrap that element in the provider <LocationProvider> tags and make it a child, also import provider at the top of this file.*/}
+            <LocationProvider>
+                <LocationList />
+            </LocationProvider>
         </article>
 
         <h2>Customers</h2>
