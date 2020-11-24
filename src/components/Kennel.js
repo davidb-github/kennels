@@ -4,8 +4,10 @@ import { LocationList }     from './location/LocationList'
 import { LocationProvider } from './location/LocationProvider'
 import { AnimalList }       from './animal/AnimalList'
 import { AnimalProvider }   from "./animal/AnimalProvider"
+import { EmployeeList }     from './employee/EmployeeList'
+import { EmployeeProvider } from "./employee/EmployeeProvider"
 import { Customer }         from "./customer/Customer"
-import { Employee }         from "./employee/Employee"
+
 // styles
 import "./Kennel.css"
 
@@ -27,9 +29,10 @@ export const Kennel = () => (
 
         <h2>Employees</h2>
         <article className="employees">
-            <Employee />
-            <Employee />
-            <Employee />
+            <EmployeeProvider>
+                <EmployeeList />
+            </EmployeeProvider>
+            
         </article>
 
         <h2>Locations</h2>
