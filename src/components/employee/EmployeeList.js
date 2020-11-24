@@ -4,9 +4,9 @@ import        { Employee }              from './Employee'
 import                                       "./Employee.css"
 
 
-export const LocationList = () => {
-    // This state changes when `getLocations()` is invoked below
-    const { locations, getLocations } = useContext(LocationContext)
+export const EmployeeList = () => {
+    // This state changes when `getEmployees()` is invoked below
+    const { employees, getEmployees } = useContext(EmployeeContext)
 
     /*
         What's the effect this is reponding to? Component was
@@ -15,25 +15,25 @@ export const LocationList = () => {
     */
 //    will run only once because 2nd arg is a blank array/
     useEffect(() => {
-        console.log("LocationList: Initial render before data")
-        getLocations()
+        console.log("EmployeeList: Initial render before data")
+        getEmployees()
     }, [])
 
     /*
         This effect is solely for learning purposes. The effect
         it is responding to is that the location state changed.
     */
-//    This will run each time locations state changes.
+//    This will run each time employees state changes.
     useEffect( () => {
-        console.log("LocationList: Location state changed")
-        console.log(locations)
-    }, [locations])
+        console.log("EmployeeList: Location state changed")
+        console.log(employees)
+    }, [employees])
 
     // use {} anytime javascript is needed inside JSX
     return (
-        <div className="locations">
+        <div className="employees">
         {
-            locations.map(loc => <Location key={loc.id} location={loc} />)
+            employees.map(emp => <Employee key={emp.id} employee={emp} />)
         }
         </div>
     )
