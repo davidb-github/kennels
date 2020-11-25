@@ -10,7 +10,7 @@ import { EmployeeProvider } from './employee/EmployeeProvider'
 import { LocationList } from "./location/LocationList"
 import { AnimalList } from "./animal/AnimalList"
 import { CustomerList } from './customer/CustomerList'
-import { EmployeeList }  from './employee/EmployeeList'
+import { EmployeeList } from './employee/EmployeeList'
 
 
 export const ApplicationViews = (props) => {
@@ -24,26 +24,29 @@ export const ApplicationViews = (props) => {
             </LocationProvider>
 
             <AnimalProvider>
-                {/* Render the animal list when http://localhost:3000/animals */}
-                <Route path="/animals">
-                    <AnimalList />
-                </Route>
+                <LocationProvider>
+                    <CustomerProvider>
+                        <Route exact path="/animals">
+                            <AnimalList />
+                        </Route>
+                    </CustomerProvider>
+                </LocationProvider>
             </AnimalProvider>
-            
+
             <CustomerProvider>
                 {/* Render the animal list when http://localhost:3000/customers */}
                 <Route path="/customers">
                     <CustomerList />
                 </Route>
             </CustomerProvider>
-            
+
             <EmployeeProvider>
                 {/* Render the animal list when http://localhost:3000/employees */}
                 <Route path="/employees">
                     <EmployeeList />
                 </Route>
             </EmployeeProvider>
-            
+
             {/* add list as descendent to the provider for customer and employees */}
         </>
     )
