@@ -11,6 +11,8 @@ import { LocationList } from "./location/LocationList"
 import { AnimalList } from "./animal/AnimalList"
 import { CustomerList } from './customer/CustomerList'
 import { EmployeeList } from './employee/EmployeeList'
+// chpt 8
+import { EmployeeForm } from './employee/EmployeeForm'
 
 
 export const ApplicationViews = (props) => {
@@ -41,13 +43,18 @@ export const ApplicationViews = (props) => {
             </CustomerProvider>
 
             <EmployeeProvider>
+              <LocationProvider>
                 {/* Render the animal list when http://localhost:3000/employees */}
-                <Route path="/employees">
-                    <EmployeeList />
-                </Route>
+                <Route exact path="/employees" render={
+                    props => <EmployeeList {...props} />
+                } />
+                
+                {/* the route that will respond when the button click changes the URL to /employees/create */}
+                <Route exact path="/employees/create" render={
+                    props => <EmployeeForm {...props} />
+                } />
+                </LocationProvider>
             </EmployeeProvider>
-
-            {/* add list as descendent to the provider for customer and employees */}
         </>
     )
 }
