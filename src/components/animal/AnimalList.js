@@ -44,6 +44,7 @@ export const AnimalList = () => {
             animals.map(animal => {
               const owner = customers.find(c => c.id === animal.customerId)
               const clinic = locations.find(l => l.id === animal.locationId)
+              // console.log("OWNER:",  owner)
               // debugger
               return <Animal key={animal.id} animal={animal} location={clinic} customer={owner} />
             })
