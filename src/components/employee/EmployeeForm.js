@@ -17,6 +17,8 @@ export const EmployeeForm = (props) => {
 
         No more `document.querySelector()` in React.
     */
+    // useRef returns an object that has a current property  {current: null} because we pass null as arg to useRef
+    // This sets up functionality to accept form inputs below - keep track of form values
     const name = useRef(null)
     const location = useRef(null)
     const animal = useRef(null)
@@ -24,7 +26,7 @@ export const EmployeeForm = (props) => {
     /*
         Get animal state and location state on initialization.
     */
-    useEffect(() => {
+    useEffect( () => {
        getAnimals().then(getLocations)
     }, [])
 
@@ -35,6 +37,8 @@ export const EmployeeForm = (props) => {
             can't just ask for the `.value` property directly,
             but rather `.current.value` now in React.
         */
+        //  value is id for the FK, must be numbers before passing to api.
+        // .current is req because the useRef hook is used to build
         const locationId = parseInt(location.current.value)
         const animalId = parseInt(animal.current.value)
 
@@ -46,6 +50,7 @@ export const EmployeeForm = (props) => {
                 locationId,
                 animalId
             })
+            // access history array and redirect to /employees after new emp is added
             .then(() => props.history.push("/employees"))
         }
     }
@@ -87,7 +92,7 @@ export const EmployeeForm = (props) => {
             </fieldset>
             <button type="submit"
                 onClick={evt => {
-                    evt.preventDefault() // Prevent browser from submitting the form
+                    evt.preventDefault() // Prevent browser from submitting the form - default submit click behavior
                     constructNewEmployee()
                 }}
                 className="btn btn-primary">
