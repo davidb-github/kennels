@@ -42,19 +42,22 @@ export const ApplicationViews = (props) => {
                 </Route>
             </CustomerProvider>
 
-            <EmployeeProvider>
-              <LocationProvider>
-                {/* Render the animal list when http://localhost:3000/employees */}
-                <Route exact path="/employees" render={
-                    props => <EmployeeList {...props} />
-                } />
-                
-                {/* the route that will respond when the button click changes the URL to /employees/create */}
-                <Route exact path="/employees/create" render={
-                    props => <EmployeeForm {...props} />
-                } />
-                </LocationProvider>
-            </EmployeeProvider>
+            <AnimalProvider>
+                <EmployeeProvider>
+                    <LocationProvider>
+                        {/* Render the animal list when http://localhost:3000/employees */}
+                        <Route exact path="/employees" render={
+                            props =>
+                                <EmployeeList {...props} />
+                        } />
+
+                        {/* the route that will respond when the button click changes the URL to /employees/create */}
+                        <Route exact path="/employees/create" render={
+                            props => <EmployeeForm {...props} />
+                        } />
+                    </LocationProvider>
+                </EmployeeProvider>
+            </AnimalProvider>
         </>
     )
 }
