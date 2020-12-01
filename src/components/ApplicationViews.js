@@ -13,6 +13,10 @@ import { CustomerList } from './customer/CustomerList'
 import { EmployeeList } from './employee/EmployeeList'
 // chpt 8
 import { EmployeeForm } from './employee/EmployeeForm'
+// chpt 10
+import { AnimalForm } from './animal/AnimalForm'
+// chpt 11
+import { EmployeeDetail } from './employee/EmployeeDetail'
 
 
 export const ApplicationViews = (props) => {
@@ -28,9 +32,15 @@ export const ApplicationViews = (props) => {
             <AnimalProvider>
                 <LocationProvider>
                     <CustomerProvider>
-                        <Route exact path="/animals">
-                            <AnimalList />
-                        </Route>
+
+                        <Route exact path="/animals" render={
+                            props => <AnimalList {...props} />
+                        } />
+
+                        <Route exact path="/animals/create" render={
+                            props => <AnimalForm {...props} />
+                        } />
+
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
@@ -42,6 +52,7 @@ export const ApplicationViews = (props) => {
                 </Route>
             </CustomerProvider>
 
+            {/* 3. add new route below employeeform for /employee/employeeId[d:] - from chapter 11 - done */}
             <AnimalProvider>
                 <EmployeeProvider>
                     <LocationProvider>
@@ -54,6 +65,11 @@ export const ApplicationViews = (props) => {
                         {/* the route that will respond when the button click changes the URL to /employees/create */}
                         <Route exact path="/employees/create" render={
                             props => <EmployeeForm {...props} />
+                        } />
+
+                        {/* New route for showing employee details */}
+                        <Route path="/employees/:employeeId(\d+)" render={
+                            props => <EmployeeDetail {...props} />
                         } />
                     </LocationProvider>
                 </EmployeeProvider>
