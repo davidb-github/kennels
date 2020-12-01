@@ -17,17 +17,27 @@ import { EmployeeForm } from './employee/EmployeeForm'
 import { AnimalForm } from './animal/AnimalForm'
 // chpt 11
 import { EmployeeDetail } from './employee/EmployeeDetail'
+// chapt 12
+import { LocationDetail } from './location/LocationDetail'
 
 
 export const ApplicationViews = (props) => {
     return (
         <>
-            <LocationProvider>
-                {/* Render the location list when http://localhost:3000/ */}
-                <Route exact path="/">
-                    <LocationList />
-                </Route>
-            </LocationProvider>
+            <AnimalProvider>
+                <EmployeeProvider>
+                    <LocationProvider>
+                        {/* Render the location list when http://localhost:3000/ */}
+                        <Route exact path="/">
+                            <LocationList />
+                        </Route>
+
+                        <Route path="/locations/:locationId(\d+)" render={
+                            props => <LocationDetail {...props} />
+                        } />
+                    </LocationProvider>
+                </EmployeeProvider>
+            </AnimalProvider>
 
             <AnimalProvider>
                 <LocationProvider>
