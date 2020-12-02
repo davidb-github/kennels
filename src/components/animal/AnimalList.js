@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from "react"
-import { AnimalContext } from './AnimalProvider'
-import { Animal } from './Animal'
-import './Animal.css'
-import { LocationContext } from "../location/LocationProvider"
-import { CustomerContext } from "../customer/CustomerProvider"
+// import React, { useContext, useEffect } from "react"
+// import { AnimalContext } from './AnimalProvider'
+// import { Animal } from './Animal'
+// import './Animal.css'
+// import { LocationContext } from "../location/LocationProvider"
+// import { CustomerContext } from "../customer/CustomerProvider"
 
 
-export const AnimalList = (props) => {
-  // This state changes when `getLocations()` is invoked below
-  const { animals, getAnimals } = useContext(AnimalContext)
-  const { locations, getLocations } = useContext(LocationContext)
-  const { customers, getCustomers } = useContext(CustomerContext)
+// export const AnimalList = (props) => {
+//   // This state changes when `getLocations()` is invoked below
+//   const { animals, getAnimals } = useContext(AnimalContext)
+//   const { locations, getLocations } = useContext(LocationContext)
+//   const { customers, getCustomers } = useContext(CustomerContext)
 
 
   /*
@@ -19,12 +19,12 @@ export const AnimalList = (props) => {
       then gets the data, then re-renders.
   */
   //    will run only once because 2nd arg is a blank array/
-  useEffect(() => {
-    console.log("AnimalList: Initial render before data")
-    getLocations()
-      .then(getCustomers)
-      .then(getAnimals)
-  }, [])
+  // useEffect(() => {
+  //   console.log("AnimalList: Initial render before data")
+  //   getLocations()
+  //     .then(getCustomers)
+  //     .then(getAnimals)
+  // }, [])
 
   //     /*
   //         This effect is solely for learning purposes. The effect
@@ -37,22 +37,54 @@ export const AnimalList = (props) => {
   //     }, [animals])
 
   // use {} anytime javascript is needed inside JSX
-  return (
-    <div className="animals">
-      {/* {console.log(animals, locations, customers)} */}
-      {/* add button */}
-      <button onClick={() => props.history.push("/animals/create")}>
-        Make Appointment
-      </button>
-      {
-        animals.map(animal => {
-          const owner = customers.find(c => c.id === animal.customerId)
-          const clinic = locations.find(l => l.id === animal.locationId)
-          console.log("OWNER:",  owner)
-          // debugger
-          return <Animal key={animal.id} animal={animal} location={clinic} customer={owner} />
-        })
-      }
-    </div>
-  )
+//   return (
+//     <div className="animals">
+//       {/* {console.log(animals, locations, customers)} */}
+//       {/* add button */}
+//       <button onClick={() => props.history.push("/animals/create")}>
+//         Make Appointment
+//       </button>
+//       {
+//         animals.map(animal => {
+//           const owner = customers.find(c => c.id === animal.customerId)
+//           const clinic = locations.find(l => l.id === animal.locationId)
+//           // console.log("OWNER:",  owner)
+//           // debugger
+//           return <Animal key={animal.id} animal={animal} location={clinic} customer={owner} />
+//         })
+//       }
+//     </div>
+//   )
+// }
+
+// begin chapter 13
+import React, { useState, useContext, useEffect } from "react"
+import { AnimalContext } from "./AnimalProvider"
+import Animal from "./Animal"
+import "./Animal.css"
+
+export const AnimalList = ({ history }) => {
+    const { getAnimals, animals } = useContext(AnimalContext)
+
+    // Initialization effect hook -> Go get animal data
+    useEffect(()=>{
+        getAnimals()
+    }, [])
+
+    return (
+        <>
+            <h1>Animals</h1>
+
+            <button onClick={() => history.push("/animals/create")}>
+                Make Reservation
+            </button>
+            <div className="animals">
+                {
+                    animals.map(animal => {
+                        return <Animal key={animal.id} animal={animal} />
+                    })
+                }
+            </div>
+        </>
+    )
 }

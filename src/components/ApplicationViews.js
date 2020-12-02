@@ -19,6 +19,8 @@ import { AnimalForm } from './animal/AnimalForm'
 import { EmployeeDetail } from './employee/EmployeeDetail'
 // chapt 12
 import { LocationDetail } from './location/LocationDetail'
+// chapt 13
+import { AnimalDetails } from './animal/AnimalDetail'
 
 
 export const ApplicationViews = (props) => {
@@ -49,6 +51,10 @@ export const ApplicationViews = (props) => {
 
                         <Route exact path="/animals/create" render={
                             props => <AnimalForm {...props} />
+                        } />
+
+                        <Route path="/animals/:animalId(\d+)" render={
+                            props => <AnimalDetails {...props} />
                         } />
 
                     </CustomerProvider>
