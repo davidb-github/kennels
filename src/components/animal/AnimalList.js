@@ -85,11 +85,13 @@ export const AnimalList = ({ history }) => {
     */
    // chpt-14 add 2nd useEffect
     useEffect(() => {
+        // debug
         console.log("searchTerms state is: ", searchTerms)
         console.log("animals state is: ", animals)
         if (searchTerms !== "") {
             // If the search field is not blank, display matching animals
             const subset = animals.filter(animal => animal.name.toLowerCase().includes(searchTerms.toLowerCase()))
+            // debug
             console.log("subset state is: ", subset)
             setFiltered(subset)
         } else {
