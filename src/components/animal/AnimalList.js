@@ -60,16 +60,43 @@
 // begin chapter 13
 import React, { useState, useContext, useEffect } from "react"
 import { AnimalContext } from "./AnimalProvider"
-import Animal from "./Animal"
+import { Animal } from './Animal'
 import "./Animal.css"
 
 export const AnimalList = ({ history }) => {
-    const { getAnimals, animals } = useContext(AnimalContext)
+    // chpt-14 added searchTerms
+    const { getAnimals, animals, searchTerms } = useContext(AnimalContext)
 
-    // Initialization effect hook -> Go get animal data
+    // chpt-14 add useState for filtered animal collection
+    const [filteredAnimals, setFiltered] = useState([])
+
+
+
+    // Init. hook to go get animal data
     useEffect(()=>{
         getAnimals()
     }, [])
+
+    
+    /*
+        This effect hook function will run when the following two state changes happen:
+            1. The animal state changes. First when it is created, then once you get the animals from the API
+            2. When the search terms change, which happens when the user types something in the AnimalSearch component
+    */
+   // chpt-14 add 2nd useEffect
+    useEffect(() => {
+        console.log("searchTerms state is: ", searchTerms)
+        console.log("animals state is: ", animals)
+        if (searchTerms !== "") {
+            // If the search field is not blank, display matching animals
+            const subset = animals.filter(animal => animal.name.toLowerCase().includes(searchTerms.toLowerCase()))
+            console.log("subset state is: ", subset)
+            setFiltered(subset)
+        } else {
+            // If the search field is blank, display all animals
+            setFiltered(animals)
+        }
+    }, [searchTerms, animals])
 
     return (
         <>
@@ -80,7 +107,7 @@ export const AnimalList = ({ history }) => {
             </button>
             <div className="animals">
                 {
-                    animals.map(animal => {
+                    filteredAnimals.map(animal => {
                         return <Animal key={animal.id} animal={animal} />
                     })
                 }
