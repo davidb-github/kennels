@@ -19,6 +19,10 @@ import { AnimalForm } from './animal/AnimalForm'
 import { EmployeeDetail } from './employee/EmployeeDetail'
 // chapt 12
 import { LocationDetail } from './location/LocationDetail'
+// chapt 13
+import { AnimalDetails } from './animal/AnimalDetail'
+// chapt 14
+import { AnimalSearch } from './animal/AnimalSearch'
 
 
 export const ApplicationViews = (props) => {
@@ -44,12 +48,24 @@ export const ApplicationViews = (props) => {
                     <CustomerProvider>
 
                         <Route exact path="/animals" render={
-                            props => <AnimalList {...props} />
+                            
+                            props => {
+                            return <> 
+                            <AnimalSearch />
+                            <AnimalList {...props} />
+                            </>
+                            }
                         } />
 
                         <Route exact path="/animals/create" render={
                             props => <AnimalForm {...props} />
                         } />
+
+                        <Route path="/animals/:animalId(\d+)" render={
+                            props => <AnimalDetails {...props} />
+                        } />
+                        
+                        
 
                     </CustomerProvider>
                 </LocationProvider>

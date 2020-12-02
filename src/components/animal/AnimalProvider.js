@@ -16,6 +16,9 @@ export const AnimalProvider = (props) => {
     // locations = [] | setLocations = function def
     const [animals, setAnimals] = useState([])
 
+    // chapter 14 - create new state var step 3
+    const [ searchTerms, setTerms ] = useState("")
+
     const getAnimals = () => {
         return fetch("http://localhost:8088/animals")
             .then(res => res.json())
@@ -34,17 +37,23 @@ export const AnimalProvider = (props) => {
             .then(getAnimals)
     }
 
+    // chapter 13 - 1
+    const getAnimalById = (id) => {
+        return fetch(`http://localhost:8088/animals/${ id }?_expand=location&_expand=customer`)
+            .then(res => res.json())
+    }
+
     /*
         You return a context provider which has the
-        `locations` state, the `addLocation` function,
-        and the `getLocation` function as keys. This
+        `animals` state, the `addAnimals` function,
+        and the `getAnimals` function as keys. This
         allows any child elements to access them.
     */
 //    the value attribute contains an object with tree key/value
     return (
         <AnimalContext.Provider value={
             {
-            animals, addAnimal, getAnimals
+            animals, addAnimal, getAnimals, getAnimalById, setTerms, searchTerms
             }
         }>
             {props.children}
