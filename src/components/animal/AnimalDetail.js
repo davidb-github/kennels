@@ -3,11 +3,11 @@ import { AnimalContext } from "./AnimalProvider"
 import "./Animal.css"
 
 export const AnimalDetails = (props) => {
-    const { releaseAnimal, getAnimalById } = useContext(AnimalContext)
+    const { getAnimalById, releaseAnimal } = useContext(AnimalContext)
 
     // use state provides the state var and the set function
     // location and customer empty objects to handle inital render of state vendor
-    const [animal, setAnimal] = useState({ location: {}, customer: {}})
+    const [animal, setAnimal] = useState({ location: {}, customer: {} })
 
     useEffect(() => {
         const animalId = parseInt(props.match.params.animalId)
@@ -25,9 +25,11 @@ export const AnimalDetails = (props) => {
             <div className="animal__breed">{animal.breed}</div>
             <div className="animal__location">Location: {animal.location.name}</div>
             <div className="animal__owner">Customer: {animal.customer.name}</div>
+            {/* chapter 15 - release animal */}
             <button onClick={
                 () => {
-                    releaseAnimal(animal)
+                    // props.match.params.animalId
+                    releaseAnimal(animal.id)
                         .then(() => {
                             props.history.push("/animals")
                         })
@@ -35,9 +37,6 @@ export const AnimalDetails = (props) => {
             }>
                 Release Animal
             </button>
-            <button onClick={() => {
-                props.history.push(`/animals/edit/${animal.id}`)
-            }}>Edit</button>
         </section>
     )
 }

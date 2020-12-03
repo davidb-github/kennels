@@ -43,6 +43,14 @@ export const AnimalProvider = (props) => {
             .then(res => res.json())
     }
 
+    // chapter 15
+    const releaseAnimal = animalId => {
+        return fetch(`http://localhost:8088/animals/${animalId}`, {
+            method: "DELETE"
+        })
+            .then(getAnimals)
+    }
+
     /*
         You return a context provider which has the
         `animals` state, the `addAnimals` function,
@@ -53,7 +61,7 @@ export const AnimalProvider = (props) => {
     return (
         <AnimalContext.Provider value={
             {
-            animals, addAnimal, getAnimals, getAnimalById, setTerms, searchTerms
+            animals, addAnimal, getAnimals, getAnimalById, setTerms, searchTerms, releaseAnimal
             }
         }>
             {props.children}
